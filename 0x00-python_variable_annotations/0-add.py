@@ -5,5 +5,5 @@ type-annotated function add that takes a float a and a float b as arguments and 
 
 
 def add(a: float, b: float) -> float:
-    result = a + b
-    return result
+    return a + b
+    
