@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
 """Typeannotated that func takes float n arg 0&returns float of the floor"""
 
 
