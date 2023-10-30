@@ -7,7 +7,6 @@ from parameterized import parameterized, parameterized_class
 from unittest.mock import patch, Mock, PropertyMock, call
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
-from parameterized import parameterized
 
 
 class TestGithubOrgClient(TestCase):
