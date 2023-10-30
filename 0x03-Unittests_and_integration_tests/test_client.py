@@ -9,6 +9,7 @@ from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 import client
 
+
 class TestGithubOrgClient(TestCase):
     """A class that defines attributes used in testing testgithuborgclient"""
 
@@ -95,5 +96,16 @@ class TestIntegrationGithubOrgClient(TestCase):
         self.assertEqual(y.repos_payload, self.repos_payload)
         self.assertEqual(y.public_repos(), self.expected_repos)
         self.assertEqual(y.public_repos("NONEXISTENT"), [])
+        self.get.assert_has_calls([call("https://api.github.com/orgs/spec"),
+                                   call(self.org_payload["repos_url"])])
+
+    def test_public_repos_with_license(self):
+        """ public repos test """
+        y = GithubOrgClient("spec")
+        self.assertEqual(y.org, self.org_payload)
+        self.assertEqual(y.repos_payload, self.repos_payload)
+        self.assertEqual(y.public_repos(), self.expected_repos)
+        self.assertEqual(y.public_repos("NONEXISTENT"), [])
+        self.assertEqual(y.public_repos("apache-2.0"), self.apache2_repos)
         self.get.assert_has_calls([call("https://api.github.com/orgs/spec"),
                                    call(self.org_payload["repos_url"])])
