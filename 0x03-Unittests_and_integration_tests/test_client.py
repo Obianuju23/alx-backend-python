@@ -6,6 +6,8 @@ from unittest import TestCase
 from parameterized import parameterized
 from unittest.mock import patch, Mock, PropertyMock
 from client import GithubOrgClient
+from fixtures import TEST_PAYLOAD
+from parameterized import parameterized
 
 
 class TestGithubOrgClient(TestCase):
@@ -31,3 +33,20 @@ class TestGithubOrgClient(TestCase):
         with patch(to_mock, PropertyMock(return_value=payload)):
             cli = GithubOrgClient("spec")
             self.assertEqual(cli._public_repos_url, expected)
+
+    @patch('client.get_json')
+    def test_public_repos(self, get_json_mock):
+        """ test the public repos function in client """
+        Chris = {"name": "Chris", "license": {"key": "a"}}
+        Uju = {"name": "Uju", "license": {"key": "b"}}
+        Cheta = {"name": "Cheta"}
+        to_mock = 'client.GithubOrgClient._public_repos_url'
+        get_json_mock.return_value = [Chris, Uju, Cheta]
+        with patch(to_mock, PropertyMock(return_value="www.yes.com")) as y:
+            spec = GithubOrgClient("spec")
+            self.assertEqual(spec.public_repos(), ['Chris', 'Uju', 'Cheta'])
+            self.assertEqual(spec.public_repos("a"), ['Chris'])
+            self.assertEqual(spec.public_repos("c"), [])
+            self.assertEqual(spec.public_repos(45), [])
+            get_json_mock.assert_called_once_with("www.yes.com")
+            y.assert_called_once_with()
