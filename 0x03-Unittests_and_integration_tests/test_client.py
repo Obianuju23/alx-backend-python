@@ -8,6 +8,7 @@ from unittest.mock import patch, Mock, PropertyMock, call
 from client import GithubOrgClient
 from fixtures import TEST_PAYLOAD
 import client
+import unittest
 
 
 class TestGithubOrgClient(TestCase):
@@ -64,7 +65,7 @@ class TestGithubOrgClient(TestCase):
     ('org_payload', 'repos_payload', 'expected_repos', 'apache2_repos'),
     TEST_PAYLOAD
 )
-class TestIntegrationGithubOrgClient(TestCase):
+class TestIntegrationGithubOrgClient(unittest.TestCase):
     """A class that defines integrated test for git hub org client"""
     @classmethod
     def setUpClass(cls):
