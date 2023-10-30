@@ -48,6 +48,7 @@ class TestGetJson(TestCase):
             # ensures that mock method is calleed only once
             mock_response.json.assert_called_once()
 
+
 class TestMemoize(TestCase):
     """A class that test for memoization"""
     def test_memoize(self):
