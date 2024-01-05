@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
-""" Module that provides a function for genrating a
-    sequence of 10 numbers
+""" Task: A coroutine called async_generator that takes no
+                 arguments.
+                 The coroutine will loop 10 times, each time asynchronously
+                 wait 1 second, then yield a random number between 0 and 10.
+                 Use the random module.
 """
 import asyncio
 import random
